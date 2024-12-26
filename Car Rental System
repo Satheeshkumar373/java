@@ -1,0 +1,145 @@
+import java.util.*;
+class Cars{
+    String name;
+    String model;
+    int rent;
+   
+    public Cars(String name,String model, int rent){
+        this.name=name;
+        this.model=model;
+        this.rent=rent;
+       
+    }
+    String getname(){
+        return name;
+    }
+    String getmodel(){
+        return model;
+    }
+    int getrent(){
+        return rent;
+    }
+    void displaydetails(){
+        System.out.println("Name = "+name);
+        System.out.println("Model = "+model);
+        System.out.println("Rent = "+rent);
+       
+    }
+}
+class Carbrand{
+    String brand;
+    ArrayList<Cars>models;
+    Carbrand(String brand){
+        this.brand=brand;
+        this.models=new ArrayList<>();
+    }
+    void add(Cars car){
+        models.add(car);
+    }
+    String getname(){
+        return brand;
+    }
+    ArrayList<Cars> getmodels(){
+        return models;
+    }
+   
+}
+class Main {
+    public static void main(String[] args) {
+      Scanner sc=new Scanner(System.in);
+        ArrayList<Carbrand >brandlist=new ArrayList<>();  
+     //  ArrayList<Cars>carlist=new ArrayList<>();
+       
+        Carbrand Bugatti =new  Carbrand("Bugatti");
+        Carbrand Ferrari=new  Carbrand("Ferrari");
+        Carbrand Tesla=new  Carbrand("Tesla");
+        Carbrand BMW=new  Carbrand("BMW");
+        
+        Bugatti.add(new Cars("Bugatti", "Veyron", 1000));
+        Bugatti.add(new Cars("Bugatti", "Chiron", 1500));
+        Bugatti.add(new Cars("Bugatti", "Divo", 1800));
+        Bugatti.add(new Cars("Bugatti", "Centodieci", 2000));
+
+       
+        Ferrari.add(new Cars("Ferrari", "488 GTB", 800));
+        Ferrari.add(new Cars("Ferrari", "LaFerrari", 1200));
+        Ferrari.add(new Cars("Ferrari", "Portofino", 1000));
+        Ferrari.add(new Cars("Ferrari", "812 Superfast", 1300));
+
+       
+        Tesla.add(new Cars("Tesla", "Model S", 500));
+        Tesla.add(new Cars("Tesla", "Model 3", 400));
+        Tesla.add(new Cars("Tesla", "Model X", 600));
+        Tesla.add(new Cars("Tesla", "Model Y", 550));
+
+       
+        BMW.add(new Cars("BMW", "M5", 700));
+        BMW.add(new Cars("BMW", "M3", 650));
+        BMW.add(new Cars("BMW", "i8", 900));
+        BMW.add(new Cars("BMW", "X5", 750));
+
+        System.out.println("Welcome to our Car Rental shop !");
+        System.out.println("Following Cars are available for Rent; ");
+  
+       brandlist.add(Bugatti);
+       brandlist.add(Ferrari);
+       brandlist.add(Tesla);
+       brandlist.add(BMW);
+       
+   /*    for(Carbrand brand:brandlist){
+           carlist.addAll(brand.getmodels());           
+       }
+       */
+       int m=1;
+       for(Carbrand brand :brandlist ){
+           System.out.println(m+"."+brand.getname());
+           m++;
+       }
+       
+       System.out.println("Please select the Car Brand ");
+       int brandchoice= sc.nextInt();
+        if(brandchoice<1||brandchoice>brandlist.size()){
+              System.out.println("Invalid option. Please select the option from given below");
+          }
+       else{
+           Carbrand selected=brandlist.get(brandchoice-1);
+              int n=1;
+              ArrayList<Cars> availablecars=selected.getmodels();
+        for(Cars car: availablecars){
+         System.out.println(n+"."+car.getmodel());
+         n++;
+        }
+       
+     
+         System.out.println("Please select the Car you want to rent ");
+          int choice= sc.nextInt();
+         
+          if(choice<1||choice>availablecars.size()){
+              System.out.println("Invalid option. Please select the option from given below");
+          }
+          else{
+              
+              Cars choosed=availablecars.get(choice-1);
+              choosed.displaydetails();
+              System.out.println("You can have 15% off if you rent for more than 3 Days!");
+          System.out.println("Number of days you want to rent :");
+          
+          int days= sc.nextInt();
+         
+          if(days<=0){
+              System.out.println("Sorry.Invalid response");
+          }
+          else if(days>3){
+               System.out.println("The total rent for "+days+" will be "+0.85*days*choosed.getrent());
+          }
+          else{
+              System.out.println("The total rent for "+days+" will be "+days*choosed.getrent());
+          }
+          }
+       
+             System.out.println("Thank you for using our car rental service !");
+         
+       }
+       
+    }
+}
