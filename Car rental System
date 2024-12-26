@@ -1,0 +1,72 @@
+import java.util.*;
+class Cars{
+    String name;
+    String model;
+    int rent;
+    
+    public Cars(String name,String model, int rent){
+        this.name=name;
+        this.model=model;
+        this.rent=rent;
+       
+    }
+    String getname(){
+        return name;
+    }
+    String getmodel(){
+        return model;
+    }
+    int getrent(){
+        return rent;
+    }
+    void displaydetails(){
+        System.out.println("Name = "+name);
+        System.out.println("Model = "+model);
+        System.out.println("Rent = "+rent);
+        
+    }
+}
+class Main {
+    public static void main(String[] args) {
+      Scanner sc=new Scanner(System.in);
+      
+       ArrayList<Cars>carlist=new ArrayList<>();
+        carlist.add(new Cars("Bugatti", "Veyron", 1000));
+        carlist.add(new Cars("Ferrari", "488 GTB", 800));
+        carlist.add(new Cars("Tesla", "Model S", 500));
+        carlist.add(new Cars("BMW", "M5", 700));
+        
+        System.out.println("Welcome to our Car Rental shop !");
+        System.out.println("Following Cars are available for Rent; ");
+        
+        
+        int n=1;
+        for(Cars car: carlist){
+         System.out.println(n+"."+car.getname());
+         n++;
+        }
+         System.out.println("Please select the Car you want to rent ");
+          int choice= sc.nextInt();
+          
+          if(choice<1||choice>carlist.size()){
+              System.out.println("Invalid option. Please select the option from given below");
+          }
+          else{
+              Cars choosed=carlist.get(choice-1);
+              choosed.displaydetails();
+          System.out.println("Number of days you want to rent :");
+          int days= sc.nextInt();
+          if(days<=0){
+              System.out.println("Sorry.Invalid response");
+          }
+          else{
+              System.out.println("The total rent for "+days+" will be "+days*choosed.getrent());
+          }
+          }
+        
+             System.out.println("Thank you for using our car rental service !");
+          
+         
+        
+    }
+}
